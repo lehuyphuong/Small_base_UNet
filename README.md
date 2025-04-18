@@ -1,9 +1,9 @@
-# UNet for Semantic Segmentation on Pascal VOC 2012 (Mini Version)
+# UNet for Semantic Segmentation on OxfordPets (Mini Version)
 
-## Overview
-This project implements a **UNet** model for **semantic segmentation** using the **Pascal VOC 2012 (Mini Version)** dataset. The goal is to train a model that learns to identify and segment various object classes in natural images, such as people, animals, and vehicles.
+## 📌 Overview
+This project implements a **UNet** model for **semantic segmentation** using the **OxfordPets** dataset. The goal is to train a model that learns to identify and segment various object classes in natural images, such as Dogs and Cats.
 
-## Background
+## 📚 Background
 **What is UNet**
 **UNet** is a widely used architecture for semantic segmentation, originally developed for biomedical image segmentation. Its hallmark design involves:
     **Encoder (contracting path)**: captures high-level features through convolution and max-pooling.
@@ -11,35 +11,36 @@ This project implements a **UNet** model for **semantic segmentation** using the
 
 This structure allows the model to combine semantic context with spatial precision, making it ideal for pixel-wise tasks.
 
-## Dataset: Pascal VOC 2012 (mini version)
+## 🧾 Dataset:  Oxford-IIIT Pet
 **Description**
-The **Pascal VOC 2012 **dataset is a benchmark in the computer vision community. The mini version is a smaller subset used for faster experimentation while retaining the original structure and class annotations.
-    **Image types**: natural images (animals, humans, indoor/outdoor objects)
-    **Segmentation masks**: pixel-wise class labels for each object
-    **Total classes**: 20 foreground object classes + 1 background
+The Oxford-IIIT Pet Dataset, also known as OxfordPets, is a well-annotated dataset designed for image classification, object detection, and semantic segmentation of pets. It contains images of 37 pet breeds with high-quality pixel-wise annotations for each pet object.
 
-**Directory Structure (VOC Format)**
+- Total classes: 37 pet breeds (e.g., Persian cat, Beagle, German Shepherd)
+- Annotations:
+    - Classification labels (breed, species, and fur length)
+    - Pixel-level segmentation masks:
+        - Label 1: Pet
+        - Label 2: Border (outline around pet)
+        - Label 3: Background
+
+
+**Directory Structure (Oxford-IIIT Pet)**
 ```
-VOCdevkit/
-└── VOC2012/
-    ├── JPEGImages/         # RGB images
-    ├── SegmentationClass/  # Ground truth segmentation masks (color images)
-    ├── ImageSets/
-    │   └── Segmentation/
-    │       ├── train.txt
-    │       ├── val.txt
-    └── Annotations/        # (not used in this project)
+oxford-pets/
+├── images/                    # Original pet images (.jpg)
+├── masks/                     # Segmentation masks (labelled as 1, 2, 3)
 ```
 
-## Project Objectives
-**Implement UNet** for multi-class semantic segmentation.
-**Preprocess** VOC data (resizing, label encoding).
-**Train** UNet on the mini Pascal VOC 2012 dataset.
-**Visualize** predictions and assess segmentation quality.
+## 📐 Task Adaptation
+For this project, the dataset is adapted to a binary semantic segmentation task:
+- Class 1 (Foreground): Pet (label == 1)
+- Class 0 (Background): Everything else (labels 2 & 3 merged)
 
-## Project Structure
+This simplification is practical for training models like UNet to detect pet shapes and boundaries effectively without worrying about breed-specific segmentation.
+
+## 🏗️ Project Structure
 ```
-├── data/                         # Pascal VOC 2012 Mini dataset (VOC format)
+├── data/                         #  Oxford-IIIT Pet dataset (VOC format)
 ├── models/
 │   └── unet.py                   # UNet architecture implementation
 ├── train.py                      # Training and validation loop
@@ -50,20 +51,20 @@ VOCdevkit/
 
 ```
 
-## Installation
+## 🔧 Installation
 You can clone this project on local machine
 
-## Training the Model
+## 🧪 Training the Model
 ```
 python train.py --epochs 50 --batch_size 8 --lr 0.001
 ```
-## Evaluation Metrics
+## 📏 Evaluation Metrics
 **Pixel Accuracy**
 **Mean IoU (Intersection over Union)**
 **Class-wise IoU**
 **Dice Coefficient**
 
-## Sample Results
-Here are some qualitative results showing how the UNet performs on the Pascal VOC Mini validation set:
+## 🖼️ Sample Results
+Here are some qualitative results showing how the UNet performs on the Oxford-IIIT Pet set:
 
-## References
+## 📌 References
