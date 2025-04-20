@@ -30,6 +30,18 @@ oxford-pets/
 ├── images/                    # Original pet images (.jpg)
 ├── masks/                     # Segmentation masks (labelled as 1, 2, 3)
 ```
+Because configuration is required after download. we suggest to follow commands:
+```
+!wget https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz
+!wget https://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz
+!tar -xvzf images.tar.gz
+!tar -xvzf annotations.tar.gz
+
+!mkdir -p data/OxfordPets/images
+!mkdir -p data/OxfordPets/masks
+!cp images/* data/OxfordPets/images/
+!cp annotations/trimaps/* data/OxfordPets/masks/
+```
 
 ## 📐 Task Adaptation
 For this project, the dataset is adapted to a binary semantic segmentation task:
@@ -48,7 +60,6 @@ This simplification is practical for training models like UNet to detect pet sha
 ├── predict.py                    # Inference script to test on new images
 ├── requirements.txt              # Project dependencies
 └── README.md                     # Project documentation
-
 ```
 
 ## 🔧 Installation
@@ -59,12 +70,12 @@ You can clone this project on local machine
 python train.py --epochs 50 --batch_size 8 --lr 0.001
 ```
 ## 📏 Evaluation Metrics
-**Pixel Accuracy**
-**Mean IoU (Intersection over Union)**
-**Class-wise IoU**
-**Dice Coefficient**
+![alt text](image.png)
 
 ## 🖼️ Sample Results
 Here are some qualitative results showing how the UNet performs on the Oxford-IIIT Pet set:
+![alt text](image-1.png)
 
 ## 📌 References
+Dataset Home: https://www.robots.ox.ac.uk/~vgg/data/pets/
+U-Net-Convolutional Networks for Biomedical Image Segmentation (https://arxiv.org/abs/1505.04597)
